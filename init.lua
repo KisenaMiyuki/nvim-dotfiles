@@ -14,4 +14,4 @@ end
 -- add the lazypath directory to the list of directories that Neovim will search for plugins
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(plugins, opts) -- spin up lazy.nvim
+require("lazy").setup("plugins", opts) -- spin up lazy.nvim
