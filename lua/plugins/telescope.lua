@@ -19,7 +19,7 @@ return {
         pcall(require('telescope').load_extension, 'fzf')
         -- Keymaps
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent files' })
+        vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'find [R]ecent files' })
         vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
         vim.keymap.set('n', '<leader>/', function()
           -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -28,8 +28,8 @@ return {
             previewer = false,
           })
         end, { desc = '[/] Fuzzily search in current buffer' })
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
-        vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = '[F]ind [W]ord' })
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find [F]iles' })
+        vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'find [W]ord' })
+        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'find [H]elp' })
     end
 }
