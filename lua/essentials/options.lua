@@ -1,4 +1,4 @@
-local options = vim.o
+local options = vim.opt
 local global = vim.g
 local windowOption = vim.wo
 
