@@ -17,11 +17,41 @@ return {
             "python", "tsx"
         },
         -- ensure_installed = "all",
+
         highlight = {
             enable = true
         },
+
         indent = {
             enable = true
+        },
+
+        textobjects = {
+            select = {
+                enable = true,
+
+                -- Automatically jump forward to textobj, similar to targets.vim
+                lookahead = true,
+
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    -- You can optionally set descriptions to the mappings (used in the desc parameter of
+                    -- nvim_buf_set_keymap) which plugins like which-key display
+                    ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                    -- You can also use captures from other query groups like `locals.scm`
+                    ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                },
+
+                -- If you set this to `true` (default is `false`) then any textobject is
+                -- extended to include preceding or succeeding whitespace. Succeeding
+                -- whitespace has priority in order to act similarly to eg the built-in
+                -- `ap`.
+                include_surrounding_whitespace = true,
+            },
+            swap = { enable = true },
+            move = { enable = true },
         }
     }
 }
