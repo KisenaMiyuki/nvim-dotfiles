@@ -30,6 +30,9 @@ options.clipboard = 'unnamedplus'
 -- Enable break indent
 options.breakindent = true
 
+-- Line wrap
+options.wrap = false
+
 -- Save undo history
 options.undofile = true
 
@@ -43,7 +46,7 @@ windowOption.signcolumn = 'yes'
 -- Decrease update time
 options.updatetime = 250
 -- Time to wait for another key after leader key is pressed
-options.timeoutlen = 1000
+options.timeoutlen = 500
 
 -- Set completeopt to have a better completion experience
 options.completeopt = 'menuone,noselect'
@@ -58,7 +61,7 @@ if global.neovide then
     global.neovide_cursor_vfx_mode = "railgun"  -- Cursor particle type
     global.neovide_cursor_vfx_opacity = 250.0  -- particle opacity
     global.neovide_cursor_vfx_particle_lifetime = 1.5  -- particle life time
-    global.neovide_cursor_vfx_particle_density = 9.0  -- number of generated particles
+    global.neovide_cursor_vfx_particle_density = 12.0  -- number of generated particles
     global.neovide_cursor_vfx_particle_speed = 9.0  -- speed of particle movement
             -- ** Only work for vfx = "railgun" **
             -- The higher the value, the less particles rotate in accordance to each other
