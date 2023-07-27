@@ -2,6 +2,7 @@ local options = vim.opt
 local global = vim.g
 local windowOption = vim.wo
 
+vim.keymap.set( '', '<space>', '<Nop>' )
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)

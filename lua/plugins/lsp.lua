@@ -19,25 +19,32 @@ return {
 
             -- Use an on_attach function to only map the following keys
             -- after the language server attaches to the current buffer
-            local on_attach = function(client, bufnr)
+            local on_attach = function(_, bufnr)
                 -- Enable completion triggered by <c-x><c-o>
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-                -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
-                vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'show hover info', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'goto [d]efinition', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'goto [i]mplementation', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'goto [r]eference', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'goto [D]eclaration', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, { desc = 'show signature help', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { desc = 'goto [t]ype definition', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { desc = 'Rename symbol', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, { desc = 'Code [a]ction', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '<Leader>mm', vim.lsp.buf.formatting, { desc = '[f]ormat document', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', 'gda', vim.diagnostic.open_float, { desc = 'Show diagnostics', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'goto previous diagnostic', noremap=true, silent=true, buffer=bufnr })
-                vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'goto next diagnostic', noremap=true, silent=true, buffer=bufnr })
+                local nmap = function(keys, func, desc)
+                    if desc then
+                        desc = 'LSP: ' .. desc
+                    end
+
+                    vim.keymap.set( 'n', keys, func, { --[[ noremap=true, silent=true, ]] buffer=bufnr, desc = desc })
+                end
+                nmap('K', vim.lsp.buf.hover, 'show hover info')
+                nmap('gd', vim.lsp.buf.definition, 'goto [d]efinition')
+                nmap('gi', vim.lsp.buf.implementation, 'goto [i]mplementation')
+                nmap('gr', vim.lsp.buf.references, 'goto [r]eference')
+                nmap('gD', vim.lsp.buf.declaration, 'goto [D]eclaration')
+                nmap('<space>K', vim.lsp.buf.signature_help, 'show signature help')
+                nmap('gt', vim.lsp.buf.type_definition, 'goto [t]ype definition')
+                nmap('<F2>', vim.lsp.buf.rename, 'Rename symbol')
+                nmap('<leader>rn', '<cmd>Lspsaga rename<CR>', '[R]e[n]ame symbol')
+                nmap('<Leader>ca', vim.lsp.buf.code_action, '[C]ode [a]ction')
+                nmap('<Leader>d', vim.lsp.buf.formatting, 'format [d]ocument')
+                nmap('gda', vim.diagnostic.open_float, 'Show diagnostics')
+                nmap('[d', vim.diagnostic.goto_prev, 'goto previous diagnostic')
+                nmap(']d', vim.diagnostic.goto_next, 'goto next diagnostic')
             end
 
             require('neodev').setup()
@@ -64,9 +71,12 @@ return {
                     }
                 end,
                 -- Next, you can provide a dedicated handler for specific servers.
-                --
+                -- !!! This will overwrite the above setup content !!!
+                -- So to get all the keybinds u need to call on_attach again
                 ["lua_ls"] = function ()
                     require("lspconfig").lua_ls.setup {
+                        on_attach = on_attach,
+                        flags = { debounce_text_changes = 150  },
                         settings = {
                             Lua = {
                                 workspace = { checkThirdParty = false },
