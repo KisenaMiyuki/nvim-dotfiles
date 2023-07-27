@@ -1,2 +1,2 @@
-require('essentials.keymaps')
 require('essentials.options')
+require('essentials.keymaps')

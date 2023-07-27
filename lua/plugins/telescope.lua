@@ -19,7 +19,7 @@ return {
         pcall(require('telescope').load_extension, 'fzf')
         -- Keymaps
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'find [R]ecent files' })
+        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = 'find [O]ld files' })
         vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
         vim.keymap.set('n', '<leader>/', function()
           -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -29,7 +29,14 @@ return {
           })
         end, { desc = '[/] Fuzzily search in current buffer' })
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find [F]iles' })
+        vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'find [K]eymaps' })
+        vim.keymap.set('n', '<leader>ft', builtin.colorscheme, { desc = 'find [T]heme' })
+        vim.keymap.set('n', '<leader>fg', builtin.registers, { desc = 'find Re[g]isters' })
         vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'find [W]ord' })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'find [H]elp' })
+        vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { desc = 'LSP find [r]eferences' })
+        vim.keymap.set('n', '<leader>fi', builtin.lsp_implementations, { desc = 'LSP find [i]mplementation' })
+        vim.keymap.set('n', '<leader>fd', builtin.lsp_definitions, { desc = 'LSP find [d]efinitions' })
+        vim.keymap.set('n', '<leader>fe', builtin.diagnostics, { desc = 'LSP find [e]rror / diagnostics' })
     end
 }

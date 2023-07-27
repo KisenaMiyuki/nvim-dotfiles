@@ -31,23 +31,26 @@ return {
 
                     vim.keymap.set( 'n', keys, func, { --[[ noremap=true, silent=true, ]] buffer=bufnr, desc = desc })
                 end
-                nmap('K', vim.lsp.buf.hover, 'show hover info')
-                nmap('gd', vim.lsp.buf.definition, 'goto [d]efinition')
-                nmap('gi', vim.lsp.buf.implementation, 'goto [i]mplementation')
-                nmap('gr', vim.lsp.buf.references, 'goto [r]eference')
+                nmap('K', '<cmd>Lspsaga hover_doc<CR>', 'show hover info')
+                nmap('gd', vim.lsp.buf.definition, 'goto [D]efinition')
+                nmap('gi', vim.lsp.buf.implementation, 'goto [I]mplementation')
+                nmap('gr', vim.lsp.buf.references, 'goto [R]eference')
                 nmap('gD', vim.lsp.buf.declaration, 'goto [D]eclaration')
                 nmap('<space>K', vim.lsp.buf.signature_help, 'show signature help')
-                nmap('gt', vim.lsp.buf.type_definition, 'goto [t]ype definition')
+                nmap('gt', vim.lsp.buf.type_definition, 'goto [T]ype definition')
                 nmap('<F2>', vim.lsp.buf.rename, 'Rename symbol')
-                nmap('<leader>rn', '<cmd>Lspsaga rename<CR>', '[R]e[n]ame symbol')
-                nmap('<Leader>ca', vim.lsp.buf.code_action, '[C]ode [a]ction')
-                nmap('<Leader>d', vim.lsp.buf.formatting, 'format [d]ocument')
-                nmap('gda', vim.diagnostic.open_float, 'Show diagnostics')
-                nmap('[d', vim.diagnostic.goto_prev, 'goto previous diagnostic')
-                nmap(']d', vim.diagnostic.goto_next, 'goto next diagnostic')
+                nmap('<leader>rn', '<cmd>Lspsaga rename ++project<CR>', '[R]e[N]ame symbol')
+                nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>', '[C]ode [A]ction')
+                -- nmap('<leader>rf', vim.lsp.buf.formatting, 'format [D]ocument')
+                nmap('[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', 'Show previous [E]rror / diagnostics')
+                nmap(']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', 'Show next [E]rror / diagnostics')
+                -- nmap('[d', vim.diagnostic.goto_prev, 'goto previous diagnostic')
+                -- nmap(']d', vim.diagnostic.goto_next, 'goto next diagnostic')
             end
 
-            require('neodev').setup()
+            require('neodev').setup()  -- Provide Neovim builtin function recognition
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()  -- For use with autocompletion / cmp
+            --
             -- this part is telling Neovim to use the lsp server
             --
             -- [[ The usual lspconfig way ]]
@@ -67,7 +70,8 @@ return {
                 function (server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {
                         on_attach = on_attach,
-                        flags = { debounce_text_changes = 150  }
+                        flags = { debounce_text_changes = 150  },
+                        capabilities = capabilities,  -- For use with autocompletion / cmp
                     }
                 end,
                 -- Next, you can provide a dedicated handler for specific servers.
