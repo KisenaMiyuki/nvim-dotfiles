@@ -9,6 +9,11 @@ vim.keymap.set( '', '<space>', '<Nop>' )
 global.mapleader = " "
 global.maplocalleader = " "
 
+-- For use with nvim-tree.lua
+-- ditch the vanilla Netrw that could potentially intefer with nvim-tree
+global.loaded_netrw = 1
+global.loaded_netrwPlugin = 1
+
 -- indentations
 options.expandtab = true
 options.tabstop = 4
@@ -69,14 +74,14 @@ if global.neovide then
             -- the lower, the more line-wise all particles become
     global.neovide_cursor_vfx_particle_phase = 2
 
-    options.guifont = "CaskaydiaCove Nerd Font:h16"
+    options.guifont = "CaskaydiaCove Nerd Font:h15"
 
     -- Blur for floating window
     global.neovide_floating_blur_amount_x = 2.0
     global.neovide_floating_blur_amount_y = 2.0
 
     -- Misc
-    global.neovide_transparency = 0.95  -- Window transparency
+    global.neovide_transparency = 0.9  -- Window transparency
     global.neovide_scroll_animation_length = 0.5  -- Scroll Animation Length
     global.neovide_hide_mouse_when_typing = true  -- Hide mouse when typing
     global.neovide_refresh_rate = 120  -- neovide fps
