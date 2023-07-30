@@ -108,3 +108,35 @@ local new_cmd = vim.api.nvim_create_user_command
 new_cmd("NvChadUpdate", function()
   require "nvchad.update"()
 end, {})
+
+
+-- [[ Neovide ]]
+if g.neovide then
+  -- Cool cursor stuff
+  g.neovide_cursor_animation_length = 0.05  -- Cursor animation duration
+  g.neovide_cursor_vfx_mode = "railgun"  -- Cursor particle type
+  g.neovide_cursor_vfx_opacity = 200.0  -- particle opacity
+  g.neovide_cursor_vfx_particle_lifetime = 1.5  -- particle life time
+  g.neovide_cursor_vfx_particle_density = 12.0  -- number of generated particles
+  g.neovide_cursor_vfx_particle_speed = 9.0  -- speed of particle movement
+      -- ** Only work for vfx = "railgun" **
+      -- The higher the value, the less particles rotate in accordance to each other
+      -- the lower, the more line-wise all particles become
+  g.neovide_cursor_vfx_particle_phase = 2
+
+  opt.guifont = "CaskaydiaCove Nerd Font:h14"
+
+  -- Blur for floating window
+  g.neovide_window_floating_opacity = 0
+  g.neovide_window_floating_blur = 2.0
+  g.neovide_floating_blur_amount_x = 2.0
+  g.neovide_floating_blur_amount_y = 2.0
+
+  -- Misc
+  g.neovide_transparency = 0.9  -- Window transparency
+  g.neovide_scroll_animation_length = 0.5  -- Scroll Animation Length
+  g.neovide_hide_mouse_when_typing = true  -- Hide mouse when typing
+  g.neovide_refresh_rate = 120  -- neovide fps
+  g.neovide_refresh_rate_idle = 5  -- neovide fps when idle
+  g.neovide_remember_window_size = true  -- Remember window size from previous session
+end
