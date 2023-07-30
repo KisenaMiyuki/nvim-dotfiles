@@ -9,6 +9,12 @@ vim.keymap.set( '', '<space>', '<Nop>' )
 global.mapleader = " "
 global.maplocalleader = " "
 
+
+-- For use with nvim-tree.lua
+-- ditch the vanilla Netrw that could potentially intefer with nvim-tree
+global.loaded_netrw = 1
+global.loaded_netrwPlugin = 1
+
 -- indentations
 options.expandtab = true
 options.tabstop = 4
@@ -60,23 +66,25 @@ if global.neovide then
     -- Cool cursor stuff
     global.neovide_cursor_animation_length = 0.05  -- Cursor animation duration
     global.neovide_cursor_vfx_mode = "railgun"  -- Cursor particle type
-    global.neovide_cursor_vfx_opacity = 250.0  -- particle opacity
+    global.neovide_cursor_vfx_opacity = 200.0  -- particle opacity
     global.neovide_cursor_vfx_particle_lifetime = 1.5  -- particle life time
-    global.neovide_cursor_vfx_particle_density = 10.0  -- number of generated particles
+    global.neovide_cursor_vfx_particle_density = 12.0  -- number of generated particles
     global.neovide_cursor_vfx_particle_speed = 9.0  -- speed of particle movement
             -- ** Only work for vfx = "railgun" **
             -- The higher the value, the less particles rotate in accordance to each other
             -- the lower, the more line-wise all particles become
-    global.neovide_cursor_vfx_particle_phase = 1.5
+    global.neovide_cursor_vfx_particle_phase = 2
 
-    options.guifont = "CaskaydiaCove Nerd Font:h16"
+    options.guifont = "CaskaydiaCove Nerd Font:h15"
 
     -- Blur for floating window
+    global.neovide_window_floating_opacity = 0
+    global.neovide_window_floating_blur = 2.0
     global.neovide_floating_blur_amount_x = 2.0
     global.neovide_floating_blur_amount_y = 2.0
 
     -- Misc
-    global.neovide_transparency = 0.95  -- Window transparency
+    global.neovide_transparency = 0.9  -- Window transparency
     global.neovide_scroll_animation_length = 0.5  -- Scroll Animation Length
     global.neovide_hide_mouse_when_typing = true  -- Hide mouse when typing
     global.neovide_refresh_rate = 120  -- neovide fps

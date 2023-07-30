@@ -10,6 +10,7 @@ return {
         config = true
     },
     {
+        -- [[ flash: navigation ]]
         "folke/flash.nvim",
         event = "VeryLazy",
         ---@type Flash.Config
@@ -30,18 +31,31 @@ return {
         },
     },
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        opt = {
-            vim.keymap.set({ 'n', 'v' }, '<Leader>e', [[<cmd>Neotree toggle<CR>]])
+        -- [[ nvim-tree ]]
+        "nvim-tree/nvim-tree.lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle tree' }),
+            view = { width = 25 },
+            filters = { dotfiles = true },
+            on_attach = function (bufnr)
+                local api = require "nvim-tree.api"
+
+                local function opts(desc)
+                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                end
+
+                -- default mappings
+                api.config.mappings.default_on_attach(bufnr)
+
+                -- custom mappings
+                vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+                vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+            end
         }
     },
     {
+        -- [[ which-key ]]
         "folke/which-key.nvim",
         event = "VeryLazy",
         init = function()
