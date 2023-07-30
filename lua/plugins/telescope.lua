@@ -38,5 +38,6 @@ return {
         vim.keymap.set('n', '<leader>fi', builtin.lsp_implementations, { desc = 'LSP find [i]mplementation' })
         vim.keymap.set('n', '<leader>fd', builtin.lsp_definitions, { desc = 'LSP find [d]efinitions' })
         vim.keymap.set('n', '<leader>fe', builtin.diagnostics, { desc = 'LSP find [e]rror / diagnostics' })
+
     end
 }

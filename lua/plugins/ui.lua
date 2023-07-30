@@ -5,12 +5,10 @@ return {
         config = true,
     },
     {
-        "lukas-reineke/indent-blankline.nvim",
-        config = function()
-    	    require('indent_blankline').setup({
-    		    show_first_indent_level = false
-    	    })
-    	end
+        'huy-hng/anyline.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = true,
+        event = 'VeryLazy',
     },
     {
         "lewis6991/gitsigns.nvim",

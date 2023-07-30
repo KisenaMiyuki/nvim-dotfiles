@@ -7,7 +7,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         {
             "L3MON4D3/LuaSnip",
-            tag = "v2.*",
+            tag = "2",
             build = "make install_jsregexp"
         },
         "saadparwaiz1/cmp_luasnip",

@@ -9,6 +9,7 @@ vim.keymap.set( '', '<space>', '<Nop>' )
 global.mapleader = " "
 global.maplocalleader = " "
 
+
 -- For use with nvim-tree.lua
 -- ditch the vanilla Netrw that could potentially intefer with nvim-tree
 global.loaded_netrw = 1
@@ -77,6 +78,8 @@ if global.neovide then
     options.guifont = "CaskaydiaCove Nerd Font:h15"
 
     -- Blur for floating window
+    global.neovide_window_floating_opacity = 0
+    global.neovide_window_floating_blur = 2.0
     global.neovide_floating_blur_amount_x = 2.0
     global.neovide_floating_blur_amount_y = 2.0
 
